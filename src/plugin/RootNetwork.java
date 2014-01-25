@@ -15,7 +15,6 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.MutableTreeNode;
-import javax.swing.tree.TreeSelectionModel;
 
 
 import cytoscape.CyEdge;
@@ -1815,10 +1814,11 @@ public class RootNetwork{
      */
     private double generateFDRPValue(List<Double> pVals, double fdr){
         Collections.sort(pVals);
-        double pval = 0.05;
-        for (int index = pVals.size(); index > 0; index --){
-            pval = pVals.get(index-1); // use -1 to use appropriate vector indices
-            if (pval < (index*fdr)/pVals.size()){
+        double pval = 0.0;
+        int pSize = pVals.size();
+        for (int index = 0; index < pSize; index ++){
+            pval = pVals.get(index); // 
+            if (pval > (index*fdr)/pSize){
                 break;
             }
         }

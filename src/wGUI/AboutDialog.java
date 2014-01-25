@@ -31,7 +31,7 @@ public class AboutDialog extends javax.swing.JDialog {
         this.mainFrame = mainFrame;
         String cite = "Wagih, O., Hao, Y., Pu, S., Merkoulovitch, A., Vlasblom, J., Turner, B., Wodak, S.J. "
                 + "GIPro: integrated visualization of genetic and physical interactions in the context of protein complexes. "
-                +"<i>Bioinformatics</i>, In press";
+                +"<i>Unpublished</i>";
         
         pluginInfo = 
         "<html>This tool uses physical and genetic interaction data to identify the functional relationships " +
