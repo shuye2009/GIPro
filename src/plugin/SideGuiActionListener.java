@@ -741,7 +741,7 @@ public class SideGuiActionListener implements ActionListener{
 
             HelperMethods.NumericalSort(complexNames);
             name += complexNames;
-
+            
             //create the complex nodes
             CyAttributes nodeAttrs = Cytoscape.getNodeAttributes();
             CyAttributes edgeAttrs = Cytoscape.getEdgeAttributes();
@@ -807,7 +807,6 @@ public class SideGuiActionListener implements ActionListener{
                                 GIProAttributeNames.NODE_LABEL_COLOUR, g.getGIKey());
                         nodeAttrs.setAttribute(identifier, 
                                 GIProAttributeNames.COMPLEX_FROM, g.getComplexes().toString());
-                        
                         
                         //Multiple complexes
                         Set<Complex> temp = new HashSet();

@@ -383,10 +383,18 @@ public class RootNetwork{
     public void createHistogram() {
         System.out.println(valuesWithin);
         String sNumBins = JOptionPane.showInputDialog(Cytoscape.getDesktop(), "Enter the number of bins (150-200 recommended)");
-        if (sNumBins != null){
-            int numberBins = Integer.parseInt(sNumBins);
-            HistogramGui.showHistogram(valuesWithin.toArray(new Double[0]),
-                    valuesBetween.toArray(new Double[0]), numberBins);
+        
+        try{
+            if (sNumBins != null){
+                int numberBins = Integer.parseInt(sNumBins);
+                HistogramGui.showHistogram(valuesWithin.toArray(new Double[0]),
+                        valuesBetween.toArray(new Double[0]), numberBins);
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,
+                            "Unable to plot histogram, not enough data!",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -429,7 +437,7 @@ public class RootNetwork{
      * @param genesInRelationList Genes in genetic interaction file
      */
     public void initializeComplexData(HashSet<String> genesInRelationList) {
-        System.out.println("Initializing complex data");
+        System.out.println("Initializing complex data for "+complexes.size() + " complexes");
         //initialize single complexes
         for(Complex c : complexes.values()){ 
             int actualInteractions = 0;
@@ -468,21 +476,39 @@ public class RootNetwork{
                         int redundantEdges = 0;
                         // pairs of genes that are in the relational file
                         int actualPairs = 0;
-
+                        
+                        Set<Gene> sharedGenes = new HashSet();
                         for(Gene gene : c1.getGenes()){
                             if(c2.containsGene(gene)){
                                 redundantEdges++;
+                                
+                                sharedGenes.add(gene);
+                                System.out.println("#SHARED GENE = "+gene.getGeneIdentifier());
                             }
                         }
-
+                        
+                        //int before = 0;
                         // Find the number of actual pairs
                         for (Gene gene1 : c1.getActualGenes()){
                             for (Gene gene2 : c2.getActualGenes()){
-                                if (mwpds.hasGeneticInteraction(gene1, gene2)){
+//                               if(mwpds.hasGeneticInteraction(gene1, gene2)){
+//                                    System.out.println("#GI="+gene1.getGeneIdentifier()+" - "+gene2.getGeneIdentifier());
+//                                    before++;
+//                                }
+                                
+                                if (mwpds.hasGeneticInteraction(gene1, gene2)
+                                        & !sharedGenes.contains(gene1) 
+                                        & !sharedGenes.contains(gene2) ){
+                                    
+                                    //System.out.println("#GI2="+gene1.getGeneIdentifier()+" - "+gene2.getGeneIdentifier());
+                                    
                                     actualPairs ++;
                                 }
                             }
                         }
+                        
+                        //System.out.println("#BEFORE="+before);
+                        //System.out.println("#AFTER="+actualPairs);
                         int totalPairs = numberOfPossiblePairs - redundantEdges;
                         ComplexEdge newEdge = new ComplexEdge(c1, c2, totalPairs, actualPairs);
                         complexEdges.put(interaction, newEdge);
@@ -545,7 +571,6 @@ public class RootNetwork{
             g1.addEdge(new SubEdge(false, score, g2));
             g2.addEdge(new SubEdge(false, score, g1));
         }
-        
         
         //Add unfiltered score for pearson correlations
         g1.addUnfilteredGeneticEdge(new SubEdge(false, score, g2));
@@ -619,27 +644,31 @@ public class RootNetwork{
             
             int nonPosRelations = numberOfEdgesInCpx - posRelationsInCpx;
             int nonNegRelations = numberOfEdgesInCpx - negRelationsInCpx;
-//            
-//            System.out.println("*******COMPLEX="+c.getName()+"*******");
-//            System.out.println("numberOfEdgesInCpx = "+numberOfEdgesInCpx);
-//            System.out.println("posRelationsInCpx = "+posRelationsInCpx);
-//            System.out.println("negRelationsInCpx = " +negRelationsInCpx );
-//            System.out.println("nonPosRelations = "+nonPosRelations);
-//            System.out.println("nonNegRelations = "+nonNegRelations);
-//            System.out.println("**************************************");
+            
+//            System.out.println("##### COMPLEX="+c.getName());
+//            System.out.println("#numberOfEdgesInCpx="+numberOfEdgesInCpx);
+//            System.out.println("#posRelationsInCpx="+posRelationsInCpx);
+//            System.out.println("#negRelationsInCpx="+negRelationsInCpx);
+//            System.out.println("#nonPosRelations="+nonPosRelations);
+//            System.out.println("#nonNegRelations="+nonNegRelations);
+//            System.out.println("#totalPos="+totalPos);
+//            System.out.println("#totalNeg="+totalNeg);
+            
+            
+            
             if (posRelationsInCpx > 0){
+//                System.out.println(posRelationsInCpx + " $ " +(totalPos - posRelationsInCpx)  +
+//                        " $ " + nonPosRelations + " $ " + (nonPositive - nonPosRelations));
                 double posPVal = getFisherExactTestPVal
                         (posRelationsInCpx, totalPos - posRelationsInCpx, 
                         nonPosRelations, nonPositive - nonPosRelations);
+                
                 pVals.add(posPVal);
                 c.setPosPValue(posPVal);
-                
-                if(c.getName().equals("cytoplasmic ribosomal small subunit")){
-                    System.out.println("#"+posRelationsInCpx +"//"+ (totalPos - posRelationsInCpx)+"//"+ 
-                        nonPosRelations +"//"+ (nonPositive - nonPosRelations));
-                }
             }
             if (negRelationsInCpx > 0){
+//                 System.out.println(posRelationsInCpx + " $ " +(totalPos - posRelationsInCpx)  +
+//                        " $ " + nonPosRelations + " $ " + (nonPositive - nonPosRelations));
                 double negPVal = getFisherExactTestPVal
                         (negRelationsInCpx, totalNeg - negRelationsInCpx, 
                         nonNegRelations, nonNegative - nonNegRelations);

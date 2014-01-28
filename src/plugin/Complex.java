@@ -3,6 +3,7 @@ package plugin;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -42,7 +43,9 @@ public class Complex implements Comparable<Complex>, Serializable{
             zero = 0;
             actual = 0;
     }
-	
+
+       
+    
     /**
      * Checks how many physical interactions exist between this complex and
      * a target complex
@@ -195,6 +198,7 @@ public class Complex implements Comparable<Complex>, Serializable{
     public void addGene(Gene g){
         genesWithin.add(g);
     }
+    
 
     /**
      * @return Number of genes in relational list

@@ -55,6 +55,12 @@ public class FisherExact {
      * @return the P-value
      */
     public final double getP(int a, int b, int c, int d) {
+        if(a < 0) a = 0;
+        if(b < 0) b = 0;
+        if(c < 0) c = 0;
+        if(d < 0) d = 0;
+        
+        
         int n = a + b + c + d;
         if (n > maxSize) {
             return Double.NaN;

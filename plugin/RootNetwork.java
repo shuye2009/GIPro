@@ -210,7 +210,8 @@ public class RootNetwork{
      * @param genesInRelationList Genes in genetic interaction file
      */
     public void initializeComplexData(HashSet<String> genesInRelationList) {
-        System.out.println("Initializing complex data");
+        System.out.println("Initializing complex data for "+complexes.size() + " complexes");
+        
         //initialize single complexes
         for(Complex c : complexes.values()){ 
             int actualInteractions = 0;
@@ -249,21 +250,34 @@ public class RootNetwork{
                         int redundantEdges = 0;
                         // pairs of genes that are in the relational file
                         int actualPairs = 0;
-
+                        Set<Gene> sharedGenes = new HashSet();
                         for(Gene gene : c1.getGenes()){
                             if(c2.containsGene(gene)){
                                 redundantEdges++;
+                                sharedGenes.add(gene);
+                                System.out.println("#SHARED GENE = "+gene.getGeneIdentifier());
                             }
                         }
-
+                        
+                        int before = 0;
+                        int after = 0;
                         // Find the number of actual pairs
                         for (Gene gene1 : c1.getActualGenes()){
                             for (Gene gene2 : c2.getActualGenes()){
-                                if (mwpds.hasGeneticInteraction(gene1, gene2)){
+                                if(mwpds.hasGeneticInteraction(gene1, gene2)){
+                                    before++;
+                                }
+                                
+                                if (mwpds.hasGeneticInteraction(gene1, gene2)
+                                        & !sharedGenes.contains(gene1) 
+                                        & !sharedGenes.contains(gene2) ){
                                     actualPairs ++;
+                                    after++;
                                 }
                             }
                         }
+                        System.out.println("#BEFORE ACTUAL = "+before);
+                        System.out.println("#AFTER ACTUAL = "+after);
                         int totalPairs = numberOfPossiblePairs - redundantEdges;
                         ComplexEdge newEdge = new ComplexEdge(c1, c2, totalPairs, actualPairs);
                         complexEdges.put(interaction, newEdge);
@@ -433,6 +447,7 @@ public class RootNetwork{
             int allRelationsInEdge = ce.actualNumberEdges();
             int posRelationsInEdge = ce.posRelations();
             int negRelationsInEdge = ce.negRelations();
+            
             
             int nonPosRelations = allRelationsInEdge - posRelationsInEdge;
             int nonNegRelations = allRelationsInEdge - negRelationsInEdge;

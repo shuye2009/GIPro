@@ -13,35 +13,21 @@
     </editor-bookmarks>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0">
         <file>
-            <url>src/guiICTools/Input.java</url>
+            <url>src/plugin/PearsonTable.java</url>
             <bookmark id="0">
                 <name/>
-                <line>737</line>
-                <key/>
-            </bookmark>
-        </file>
-        <file>
-            <url>src/guiICTools/MyWizardPanelDataStorage.java</url>
-            <bookmark id="0">
-                <name/>
-                <line>175</line>
-                <key/>
-            </bookmark>
-            <bookmark id="0">
-                <name/>
-                <line>585</line>
+                <line>716</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/omarwagih/Development/GIProPlugin_new/src/wGUI/Wizard.java</file>
-            <file>file:/Users/omarwagih/Development/GIProPlugin_new/src/wGUI/WizardController.java</file>
-            <file>file:/Users/omarwagih/Development/GIProPlugin_new/src/wGUI/WizardModel.java</file>
-            <file>file:/Users/omarwagih/Development/GIProPlugin_new/src/wGUI/WizardPanel.java</file>
-            <file>file:/Users/omarwagih/Development/GIProPlugin_new/src/plugin/RootNetwork.java</file>
-            <file>file:/Users/omarwagih/Development/GIProPlugin_new/src/wGUI/AboutDialog.java</file>
+            <file>file:/Users/omarwagih/Development/GIProPlugin/src/plugin/RootNetwork.java</file>
+            <file>file:/Users/omarwagih/Development/GIProPlugin/src/plugin/ComplexEdge.java</file>
+            <file>file:/Users/omarwagih/Development/GIProPlugin/src/plugin/SideGuiActionListener.java</file>
+            <file>file:/Users/omarwagih/Development/GIProPlugin/src/plugin/FisherExact.java</file>
+            <file>file:/Users/omarwagih/Development/GIProPlugin/src/plugin/Complex.java</file>
         </group>
     </open-files>
 </project-private>
