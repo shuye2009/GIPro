@@ -23,11 +23,14 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/omarwagih/Development/GIProPlugin/src/plugin/RootNetwork.java</file>
-            <file>file:/Users/omarwagih/Development/GIProPlugin/src/plugin/ComplexEdge.java</file>
-            <file>file:/Users/omarwagih/Development/GIProPlugin/src/plugin/SideGuiActionListener.java</file>
-            <file>file:/Users/omarwagih/Development/GIProPlugin/src/plugin/FisherExact.java</file>
             <file>file:/Users/omarwagih/Development/GIProPlugin/src/plugin/Complex.java</file>
+            <file>file:/Users/omarwagih/Development/GIProPlugin/src/plugin/FisherExact.java</file>
+            <file>file:/Users/omarwagih/Development/GIProPlugin/src/plugin/Gene.java</file>
+            <file>file:/Users/omarwagih/Development/GIProPlugin/src/plugin/RootNetwork.java</file>
+            <file>file:/Users/omarwagih/Development/GIProPlugin/plugin/PearsonEdges.java</file>
+            <file>file:/Users/omarwagih/Development/GIProPlugin/src/plugin/ComplexEdge.java</file>
+            <file>file:/Users/omarwagih/Development/GIProPlugin/plugin/GeneNodeContextMenu.java</file>
+            <file>file:/Users/omarwagih/Development/GIProPlugin/src/plugin/SideGuiActionListener.java</file>
         </group>
     </open-files>
 </project-private>

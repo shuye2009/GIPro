@@ -1735,7 +1735,7 @@ public class RootNetwork{
         subAction.add(createSubNet);
         subAction.add(createGeneHeatMap);
         subAction.add(createComplexHeatMap);
-        subAction.add(createHistogram);
+        //subAction.add(createHistogram); Histogram functionality removed!
         subAction.add(exportResults);
         subAction.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 20));
         
@@ -1756,8 +1756,8 @@ public class RootNetwork{
         //this order works well
         subAction.add(subnetRawHeatmap);
         subAction.add(subnetPatterns);
-        subAction.add(subnetCorrTables);
-        subAction.add(subnetCorrEdges);
+        //subAction.add(subnetCorrTables); Correlation tables removed
+        //subAction.add(subnetCorrEdges); Correlation edges removed
         subAction.add(new JLabel(""));
         subAction.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 20));
         
@@ -1841,14 +1841,13 @@ public class RootNetwork{
      * @param fdr False discovery rate
      * @return P-value cutoff
      */
-    private double generateFDRPValue(List<Double> pVals, double fdr){
+     private double generateFDRPValue(List<Double> pVals, double fdr){
         Collections.sort(pVals);
         double pval = 0.0;
-        
         int pSize = pVals.size();
-        for (int index = 0; index < pSize; index ++){
-            pval = pVals.get(index); // 
-            if (pval > (index*fdr)/pSize){
+        for (int index = 1; index < pSize+1; index ++){  // note the index start with 1
+            pval = pVals.get(index-1); // note it is index-1, instead of index
+            if (pval > (index*fdr)/pSize){ // The problem was caused by index == 0, the loop breaks whenever pval > 0
                 break;
             }
         }

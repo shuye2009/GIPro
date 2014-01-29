@@ -109,8 +109,8 @@ public class GeneNodeContextMenu implements NodeContextMenuListener{
         r.addActionListener(al);
         menu.add(k);
         menu.add(p);
-        menu.add(t);
-        menu.add(r);
+        //menu.add(t); Correlation edges functionality removed
+        //menu.add(r); Correlation tables functionality removed
         
     }
     
