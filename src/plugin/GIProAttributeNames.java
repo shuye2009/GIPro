@@ -12,6 +12,7 @@ public class GIProAttributeNames {
 	public static final String EDGE_TYPE = "GIPro_EdgeType";//p, gp, gn
         public static final String EDGE_CORR = "GIPro_EdgeCorrelation";//person corr
         public static final String EDGE_SCORE = "GIPro_Score";//person corr
+        public static final String EDGE_PPISCORE = "GIPro_PPIScore";//person corr
 	public static final String NODE_TYPE = "GIPro_NodeType";//p, n, b, 0
 	public static final String COMPLEX_COLOR = "GIPro_ComplexColor";
 	public static final String COMPLEX_FROM = "GIPro_Complex";

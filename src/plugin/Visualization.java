@@ -33,7 +33,11 @@ import cytoscape.visual.VisualPropertyType;
 import cytoscape.visual.VisualStyle;
 import cytoscape.visual.calculators.BasicCalculator;
 import cytoscape.visual.calculators.Calculator;
+import cytoscape.visual.mappings.BoundaryRangeValues;
+import cytoscape.visual.mappings.ContinuousMapping;
 import cytoscape.visual.mappings.DiscreteMapping;
+import cytoscape.visual.mappings.Interpolator;
+import cytoscape.visual.mappings.LinearNumberToNumberInterpolator;
 import cytoscape.visual.mappings.ObjectMapping;
 import cytoscape.visual.mappings.PassThroughMapping;
 import javax.swing.JOptionPane;
@@ -314,7 +318,22 @@ public class Visualization {
 			Calculator edgeLabelCalculator = new BasicCalculator("edge label calculator", edgeLable, VisualPropertyType.EDGE_LABEL);
 			eac.setCalculator(edgeLabelCalculator);
                         
-			
+                        
+			ContinuousMapping scoreStrength = new ContinuousMapping(4, ObjectMapping.EDGE_MAPPING);
+                        scoreStrength.setControllingAttributeName(GIProAttributeNames.EDGE_SCORE);
+                        Interpolator scoreToWidth = new LinearNumberToNumberInterpolator();
+                        scoreStrength.setInterpolator(scoreToWidth);
+                        BoundaryRangeValues bv0 = new BoundaryRangeValues(3, 3, 3);
+			BoundaryRangeValues bv1 = new BoundaryRangeValues(11,11,11);
+                        
+                        
+                        scoreStrength.addPoint(-1, bv1); 
+                        scoreStrength.addPoint(0, bv0); 
+			scoreStrength.addPoint(1, bv1);
+                        
+                        Calculator geneEdgeWidthCalculator = new BasicCalculator("gene edge width calculator", scoreStrength, VisualPropertyType.EDGE_LINE_WIDTH);
+			eac.setCalculator(geneEdgeWidthCalculator);
+                        
 			/*
 			ContinuousMapping edgeWidth = new ContinuousMapping(1.61803, ObjectMapping.EDGE_MAPPING);
 			edgeWidth.setControllingAttributeName(GIProAttributeNames.WEIGHT);

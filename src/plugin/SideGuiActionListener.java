@@ -861,7 +861,7 @@ public class SideGuiActionListener implements ActionListener{
                                 edgeAttrs.setAttribute(edge.getIdentifier(), 
                                         GIProAttributeNames.EDGE_TYPE, "p");
                                 edgeAttrs.setAttribute(edge.getIdentifier(), 
-                                        GIProAttributeNames.EDGE_SCORE, 
+                                        GIProAttributeNames.EDGE_PPISCORE, 
                                         gs.getPhysicalEdge(gt).getScore());
                                 Set<String> sharedComplexes = new HashSet(gt.getComplexes());
                                 sharedComplexes.retainAll(gs.getComplexes());
