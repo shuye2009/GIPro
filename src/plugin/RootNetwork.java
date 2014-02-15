@@ -466,6 +466,9 @@ public class RootNetwork{
                 }
 
                 if(!c1.equals(c2)){
+                    
+                    boolean b = (c1.equals("Rpd3L complex") && c2.equals("Snt2C complex"))||
+                            (c1.equals("Snt2C complex") && c2.equals("Rpd3L complex"));
                     //now c1 is smaller
                     String interaction = c1.getName() + "//" + c2.getName();
                     String interaction2 = c2.getName() + "//" + c1.getName();
@@ -497,16 +500,20 @@ public class RootNetwork{
 //                                }
                                 
                                 if (mwpds.hasGeneticInteraction(gene1, gene2)
-                                        & !sharedGenes.contains(gene1) 
-                                        & !sharedGenes.contains(gene2) ){
+                                        && !sharedGenes.contains(gene1) 
+                                        && !sharedGenes.contains(gene2) ){
                                     
                                     //System.out.println("#GI2="+gene1.getGeneIdentifier()+" - "+gene2.getGeneIdentifier());
-                                    
+                                    if(b) System.out.println("###GI BETWEEN:"+gene1+"_"+gene2);
                                     actualPairs ++;
                                 }
                             }
                         }
-                        
+                        if(b){
+                            System.out.println("#actualPairs="+actualPairs); 
+                            System.out.println("#numberOfPossiblePairs="+numberOfPossiblePairs);
+                            System.out.println("#redundantEdges="+redundantEdges);
+                        }
                         //System.out.println("#BEFORE="+before);
                         //System.out.println("#AFTER="+actualPairs);
                         int totalPairs = numberOfPossiblePairs - redundantEdges;

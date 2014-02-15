@@ -1291,8 +1291,22 @@ public class MyWizardPanelDataStorage implements Serializable{
 //        String g2 = gene2.getGeneName();
         String g1 = gene1.getGeneIdentifier();
         String g2 = gene2.getGeneIdentifier();
-        return (genePairsInRelationalFile.containsKey(g1 + "//" + g2) 
-                || genePairsInRelationalFile.containsKey(g2 + "//" + g1));
+        
+        Double score = 0.0;
+        if(genePairsInRelationalFile.containsKey(g1 + "//" + g2)){
+            score = genePairsInRelationalFile.get(g1 + "//" + g2);
+        }else if(genePairsInRelationalFile.containsKey(g2 + "//" + g1)){
+            score = genePairsInRelationalFile.get(g2 + "//" + g1);
+        }else{
+            return false;
+        }
+        
+        if(score > positiveCutoff || score < negativeCutoff){
+            return true;
+        }
+        return false;
+        //return (genePairsInRelationalFile.containsKey(g1 + "//" + g2) 
+         //       || genePairsInRelationalFile.containsKey(g2 + "//" + g1));
     }
     
     /**
