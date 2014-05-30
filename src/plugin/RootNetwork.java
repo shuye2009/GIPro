@@ -685,7 +685,8 @@ public class RootNetwork{
             
         }
 
-        withinPVal = generateFDRPValue(pVals, fdr);
+        //withinPVal = generateFDRPValue(pVals, fdr);
+        withinPVal = 1.1;   // disable entichment analysis for within complex
         //System.out.println("within " +withinPVal);
         for (Complex c : complexes.values()){
             c.setSignificance(withinPVal);
